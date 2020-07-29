@@ -1,0 +1,3 @@
+[submodule "external/moge"]
+	path = external/moge
+	url = https://github.com/bggd/moge

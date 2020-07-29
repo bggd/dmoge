@@ -31,3 +31,6 @@ dmoge.dll
 dmoge.a
 dmoge.lib
 dmoge-test-*
+dmoge.sln
+.vs/
+build/

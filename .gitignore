@@ -22,3 +22,12 @@ docs/
 
 # Code coverage
 *.lst
+
+# dmoge
+/dmoge
+dmoge.so
+dmoge.dylib
+dmoge.dll
+dmoge.a
+dmoge.lib
+dmoge-test-*

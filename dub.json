@@ -1,9 +1,9 @@
 {
-	"authors": [
-		"birthggd"
-	],
-	"copyright": "Copyright © 2020, birthggd",
-	"description": "binding of moge",
-	"license": "MIT",
-	"name": "dmoge"
+  "authors": [
+  	"birthggd"
+  ],
+  "copyright": "Copyright © 2020, birthggd",
+  "description": "binding of moge",
+  "license": "MIT",
+  "name": "dmoge"
 }

@@ -1,9 +1,13 @@
 {
   "authors": [
-  	"birthggd"
+    "birthggd"
   ],
   "copyright": "Copyright © 2020, birthggd",
   "description": "binding of moge",
   "license": "MIT",
-  "name": "dmoge"
+  "name": "dmoge",
+  "targetType": "library",
+  "sourceFiles-windows": [
+    "external/lib/moge-gl.lib"
+  ]
 }

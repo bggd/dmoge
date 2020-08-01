@@ -132,7 +132,7 @@ struct Context
 struct ContextDesc
 {
     uint maxShaders;
-    uint maxUniforms;
+    uint maxUniformArrays;
     uint maxVertexBuffers;
     uint maxTextures;
     void* hwnd;

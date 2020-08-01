@@ -75,7 +75,7 @@ struct InputLayout
     uint numFloat;
 }
 
-struct ShaderDecl
+struct ShaderDesc
 {
     InputLayout* inputArray;
     uint numInput;
@@ -85,7 +85,7 @@ struct ShaderDecl
     size_t numByteOfPixelShader;
 }
 
-struct UniformArrayDecl
+struct UniformArrayDesc
 {
     const char* name;
     ShaderStage stage;
@@ -93,7 +93,7 @@ struct UniformArrayDecl
     uint numElement;
 }
 
-struct TextureDecl
+struct TextureDesc
 {
     const char* data;
     uint width;
@@ -129,7 +129,7 @@ struct Context
     ContextImpl* pimpl;
 }
 
-struct ContextDecl
+struct ContextDesc
 {
     uint maxShaders;
     uint maxUniforms;
@@ -138,7 +138,7 @@ struct ContextDecl
     void* hwnd;
 }
 
-Context createContext(ref ContextDecl decl);
+Context createContext(ref ContextDesc desc);
 
 private:
 int getBackend();

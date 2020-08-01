@@ -5,8 +5,8 @@ import moge.handle;
 enum GLBackend
 {
     undefined = 0,
-    ogl,
-    d3d11
+    d3d11,
+    ogl
 }
 
 enum ShaderStage

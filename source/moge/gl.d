@@ -2,6 +2,13 @@ module moge.gl;
 
 import moge.handle;
 
+enum GLBackend
+{
+    undefined = 0,
+    ogl,
+    d3d11
+}
+
 enum ShaderStage
 {
     undefined = 0,
@@ -107,4 +114,5 @@ struct ContextDecl
     void* hwnd;
 }
 
+GLBackend getBackend();
 Context createContext(ref ContextDecl decl);

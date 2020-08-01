@@ -41,6 +41,25 @@ enum DrawPrimitive
     triangles
 }
 
+GLBackend getGLBackend() {
+  const int i = getBackend();
+  assert(i);
+  GLBackend backend;
+  if (i == GLBackend.ogl) {
+    backend = GLBackend.ogl;
+  }
+  else if (i == GLBackend.d3d11) {
+    backend = GLBackend.d3d11;
+  }
+  assert(backend);
+  return backend;
+}
+
+unittest {
+  auto b = getGLBackend();
+  assert(b);
+}
+
 extern (C++,`moge`) : extern (C++,`gl`) :  // moge::gl
 struct InputLayout
 {
@@ -114,5 +133,7 @@ struct ContextDecl
     void* hwnd;
 }
 
-GLBackend getBackend();
 Context createContext(ref ContextDecl decl);
+
+private:
+int getBackend();

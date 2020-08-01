@@ -104,6 +104,7 @@ struct ContextDecl
     uint maxUniforms;
     uint maxVertexBuffers;
     uint maxTextures;
+    void* hwnd;
 }
 
-void createContext(ref Context ctx, ref ContextDecl decl);
+Context createContext(ref ContextDecl decl);

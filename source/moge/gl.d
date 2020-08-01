@@ -41,29 +41,34 @@ enum DrawPrimitive
     triangles
 }
 
-GLBackend getGLBackend() {
-  const int i = getBackend();
-  assert(i);
-  GLBackend backend;
-  if (i == GLBackend.ogl) {
-    backend = GLBackend.ogl;
-  }
-  else if (i == GLBackend.d3d11) {
-    backend = GLBackend.d3d11;
-  }
-  assert(backend);
-  return backend;
+GLBackend getGLBackend()
+{
+    const int i = getBackend();
+    assert(i);
+    GLBackend backend;
+    if (i == GLBackend.ogl)
+    {
+        backend = GLBackend.ogl;
+    }
+    else if (i == GLBackend.d3d11)
+    {
+        backend = GLBackend.d3d11;
+    }
+    assert(backend);
+    return backend;
 }
 
-unittest {
-  auto b = getGLBackend();
-  assert(b);
+unittest
+{
+    auto b = getGLBackend();
+    assert(b);
 }
 
-extern (C++,`moge`) : extern (C++,`gl`) :  // moge::gl
+extern (C++,`moge`):
+extern (C++,`gl`): // moge::gl
 struct InputLayout
 {
-    const char * glslAttributeName;
+    const char* glslAttributeName;
     uint glslAttributeLocation;
     const char* hlslSemanticName;
     uint hlslSemanticIndex;

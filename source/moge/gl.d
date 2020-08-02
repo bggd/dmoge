@@ -138,8 +138,7 @@ void destroyUniformArray(ref Context ctx, ref UniformArray);
 void updateUniformArray(ref Context ctx, ref UniformArray uary, const(void*) data, size_t num_bytes);
 VertexBuffer createVertexBuffer(ref Context ctx, uint num_bytes);
 void destroyVertexBuffer(ref Context ctx, ref VertexBuffer vbo);
-void updateVertexBuffer(ref Context ctx, ref VertexBuffer vbo,
-        const(void*) vertices, size_t num_bytes);
+void updateVertexBuffer(ref Context ctx, ref VertexBuffer vbo, const(void*) vertices, size_t num_bytes);
 Texture createTexture(ref Context ctx, ref TextureDesc desc);
 void destroyTexture(ref Context ctx, ref Texture tex);
 

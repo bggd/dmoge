@@ -5,8 +5,8 @@ import moge.handle;
 enum GLBackend
 {
     undefined = 0,
-    ogl,
-    d3d11
+    d3d11,
+    ogl
 }
 
 enum ShaderStage
@@ -122,7 +122,7 @@ struct Context
 struct ContextDesc
 {
     uint maxShaders;
-    uint maxUniforms;
+    uint maxUniformArrays;
     uint maxVertexBuffers;
     uint maxTextures;
     void* hwnd;

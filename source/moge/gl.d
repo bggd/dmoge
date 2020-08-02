@@ -45,17 +45,7 @@ GLBackend getGLBackend()
 {
     const int i = getBackend();
     assert(i);
-    GLBackend backend;
-    if (i == GLBackend.ogl)
-    {
-        backend = GLBackend.ogl;
-    }
-    else if (i == GLBackend.d3d11)
-    {
-        backend = GLBackend.d3d11;
-    }
-    assert(backend);
-    return backend;
+    return cast(GLBackend) i;
 }
 
 unittest
@@ -139,6 +129,19 @@ struct ContextDesc
 }
 
 Context createContext(ref ContextDesc desc);
+void destroyContext(ref Context ctx);
+void resizeBackBuffer(ref Context ctx);
+Shader createShader(ref Context ctx, ref ShaderDesc desc);
+void destroyShader(ref Context ctx, ref Shader shdr);
+UniformArray createUniformArray(ref Context ctx, ref UniformArrayDesc desc);
+void destroyUniformArray(ref Context ctx, ref UniformArray);
+void updateUniformArray(ref Context ctx, ref UniformArray uary, const(void*) data, size_t num_bytes);
+VertexBuffer createVertexBuffer(ref Context ctx, uint num_bytes);
+void destroyVertexBuffer(ref Context ctx, ref VertexBuffer vbo);
+void updateVertexBuffer(ref Context ctx, ref VertexBuffer vbo,
+        const(void*) vertices, size_t num_bytes);
+Texture createTexture(ref Context ctx, ref TextureDesc desc);
+void destroyTexture(ref Context ctx, ref Texture tex);
 
 private:
 int getBackend();

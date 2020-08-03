@@ -54,6 +54,18 @@ unittest
     assert(b);
 }
 
+void draw(ref Context ctx, DrawPrimitive topology, uint count, ushort offset)
+{
+    MOGE_GL_DRAW_PRIMITIVE draw_type = cast(MOGE_GL_DRAW_PRIMITIVE) topology;
+    draw(ctx, draw_type, count, offset);
+}
+
+private enum MOGE_GL_DRAW_PRIMITIVE
+{
+    MOGE_GL_DRAW_PRIMITIVE_UNDEFINED = 0,
+    MOGE_GL_DRAW_PRIMITIVE_TRIANGLES
+}
+
 extern (C++,`moge`):
 extern (C++,`gl`): // moge::gl
 struct InputLayout
@@ -128,19 +140,27 @@ struct ContextDesc
     void* hwnd;
 }
 
-Context createContext(ref ContextDesc desc);
-void destroyContext(ref Context ctx);
-void resizeBackBuffer(ref Context ctx);
-Shader createShader(ref Context ctx, ref ShaderDesc desc);
-void destroyShader(ref Context ctx, ref Shader shdr);
-UniformArray createUniformArray(ref Context ctx, ref UniformArrayDesc desc);
-void destroyUniformArray(ref Context ctx, ref UniformArray);
-void updateUniformArray(ref Context ctx, ref UniformArray uary, const(void*) data, size_t num_bytes);
-VertexBuffer createVertexBuffer(ref Context ctx, uint num_bytes);
-void destroyVertexBuffer(ref Context ctx, ref VertexBuffer vbo);
-void updateVertexBuffer(ref Context ctx, ref VertexBuffer vbo, const(void*) vertices, size_t num_bytes);
-Texture createTexture(ref Context ctx, ref TextureDesc desc);
-void destroyTexture(ref Context ctx, ref Texture tex);
+Context createContext(ref ContextDesc);
+void destroyContext(ref Context);
+void resizeBackBuffer(ref Context);
+Shader createShader(ref Context, ref ShaderDesc);
+void destroyShader(ref Context, ref Shader);
+UniformArray createUniformArray(ref Context, ref UniformArrayDesc);
+void destroyUniformArray(ref Context, ref UniformArray);
+void updateUniformArray(ref Context, ref UniformArray, const(void*) data, size_t num_bytes);
+VertexBuffer createVertexBuffer(ref Context, uint num_bytes);
+void destroyVertexBuffer(ref Context, ref VertexBuffer);
+void updateVertexBuffer(ref Context, ref VertexBuffer, const(void*) vertices, size_t num_bytes);
+Texture createTexture(ref Context, ref TextureDesc);
+void destroyTexture(ref Context, ref Texture);
+
+void clear(ref Context, float R, float G, float B, float A);
+void present(ref Context);
+void setShader(ref Context, ref Shader);
+void setUniformArray(ref Context, ref UniformArray);
+void setTexture(ref Context, ref Texture);
+void setVertexBuffer(ref Context, ref VertexBuffer);
 
 private:
 int getBackend();
+void draw(ref Context ctx, MOGE_GL_DRAW_PRIMITIVE topology, uint count, ushort offset);

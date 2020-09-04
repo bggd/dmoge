@@ -41,11 +41,16 @@ enum DrawPrimitive
     triangles
 }
 
+private enum MOGE_GL_BACKEND
+{
+    MOGE_GL_BACKEND_UNDEFINED = 0,
+    MOGE_GL_BACKEND_D3D11,
+    MOGE_GL_BACKEND_OGL
+}
+
 GLBackend getGLBackend()
 {
-    const int i = getBackend();
-    assert(i);
-    return cast(GLBackend) i;
+    return cast(GLBackend) getBackend();
 }
 
 unittest
@@ -162,5 +167,5 @@ void setTexture(ref Context, ref Texture);
 void setVertexBuffer(ref Context, ref VertexBuffer);
 
 private:
-int getBackend();
+MOGE_GL_BACKEND getBackend();
 void draw(ref Context ctx, MOGE_GL_DRAW_PRIMITIVE topology, uint count, ushort offset);

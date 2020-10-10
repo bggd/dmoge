@@ -1,3 +1,1 @@
 [*.d]
-max_line_length = 999
-dfmt_soft_max_line_length = 999

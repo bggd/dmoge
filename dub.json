@@ -7,6 +7,9 @@
   "license": "MIT",
   "name": "dmoge",
   "targetType": "library",
+  "dependencies" : {
+    "bindbc-sdl": "~>0.19.0"
+  },
   "sourceFiles-windows": [
     "external/lib/moge-gl.lib"
   ]

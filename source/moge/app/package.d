@@ -1,3 +1,3 @@
 module moge.app;
 
-public import moge.main_loop;
+public import moge.app.main_loop;

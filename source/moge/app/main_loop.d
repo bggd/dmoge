@@ -1,4 +1,4 @@
-module moge.main_loop;
+module moge.app.main_loop;
 
 import bindbc.sdl;
 

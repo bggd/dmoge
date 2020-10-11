@@ -32,12 +32,17 @@ class MainLoop
         assert(this.window);
 
         this.isRunning = true;
+
+        this.onInit();
     }
 
     void shutdown()
     {
         assert(this.isRunning == false);
         assert(this.window);
+
+        this.onShutdown();
+
         SDL_DestroyWindow(this.window);
         this.window = null;
         SDL_Quit();
@@ -80,7 +85,11 @@ class MainLoop
         }
     }
 
-    void onSetup()
+    void onInit()
+    {
+    }
+
+    void onShutdown()
     {
     }
 

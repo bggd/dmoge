@@ -15,7 +15,7 @@ class MainLoop
     SDL_Window* window;
     bool isRunning;
 
-    void create(ref MainLoopConfig config)
+    void init(ref MainLoopConfig config)
     {
         assert(this.window == null);
         assert(this.isRunning == false);
@@ -34,7 +34,7 @@ class MainLoop
         this.isRunning = true;
     }
 
-    void destroy()
+    void shutdown()
     {
         assert(this.isRunning == false);
         assert(this.window);
@@ -102,7 +102,7 @@ unittest
     MainLoop mainloop = new App();
 
     MainLoopConfig config;
-    mainloop.create(config);
+    mainloop.init(config);
 
     version (Windows)
     {
@@ -114,5 +114,5 @@ unittest
     }
     mainloop.pollEvents();
     mainloop.isRunning = false;
-    mainloop.destroy();
+    mainloop.shutdown();
 }

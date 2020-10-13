@@ -6,6 +6,8 @@ targetType "library"
 
 dependency "bindbc-sdl" version="~>0.19.0"
 
+preBuildCommands "git submodule update --init --recursive $PACKAGE_DIR/external/moge"
+
 preBuildCommands "cmake -B $PACKAGE_DIR/build $PACKAGE_DIR -DMOGE_GL_BACKEND_D3D11=ON" platform="windows"
 preBuildCommands "cmake --build $PACKAGE_DIR/build --config RelWithDebInfo --target install" platform="windows"
 

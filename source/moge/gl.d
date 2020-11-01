@@ -71,7 +71,7 @@ private enum MOGE_GL_DRAW_PRIMITIVE
     MOGE_GL_DRAW_PRIMITIVE_TRIANGLES
 }
 
-extern(C) alias mogeGLGetProcAddress = void* function(const char*);
+extern(C) alias mogeGLGetProcAddress = void* function(const(char*));
 
 extern (C++,`moge`):
 extern (C++,`gl`): // moge::gl

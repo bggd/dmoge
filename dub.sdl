@@ -8,7 +8,15 @@ dependency "bindbc-sdl" version="~>0.19.0"
 
 preBuildCommands "git submodule update --init --recursive $PACKAGE_DIR/external/moge"
 
-preBuildCommands "cmake -B $PACKAGE_DIR/build $PACKAGE_DIR -DMOGE_GL_BACKEND_D3D11=ON" platform="windows"
-preBuildCommands "cmake --build $PACKAGE_DIR/build --config RelWithDebInfo --target install" platform="windows"
+configuration "mogeGLD3D11" {
+  platforms "windows"
+  preBuildCommands "cmake -B $PACKAGE_DIR/build $PACKAGE_DIR -DMOGE_GL_BACKEND_D3D11=ON"
+  preBuildCommands "cmake --build $PACKAGE_DIR/build --config RelWithDebInfo --target install"
+}
+
+configuration "mogeGLOGL" {
+  preBuildCommands "cmake -B $PACKAGE_DIR/build $PACKAGE_DIR -DMOGE_GL_BACKEND_OGL=ON"
+  preBuildCommands "cmake --build $PACKAGE_DIR/build --config RelWithDebInfo --target install"
+}
 
 sourceFiles "$PACKAGE_DIR/external/lib/moge-gl.lib" platform="windows"

@@ -71,7 +71,8 @@ private enum MOGE_GL_DRAW_PRIMITIVE
     MOGE_GL_DRAW_PRIMITIVE_TRIANGLES
 }
 
-extern (C) alias mogeGLGetProcAddress = void* function(const(char*));
+extern (C) alias getProcAddressFuncPtr = void* function(const char*);
+extern (C) void MogeLoadOGL(getProcAddressFuncPtr getProcAddress);
 
 extern (C++,`moge`):
 extern (C++,`gl`): // moge::gl
@@ -145,7 +146,6 @@ struct ContextDesc
     uint maxVertexBuffers;
     uint maxTextures;
     void* hwnd;
-    void* function(const char*) getProcAddress;
 }
 
 Context createContext(ref ContextDesc);

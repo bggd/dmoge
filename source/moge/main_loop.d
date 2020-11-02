@@ -1,6 +1,7 @@
 module moge.main_loop;
 
 import bindbc.sdl;
+import gl = moge.gl;
 
 struct MainLoopConfig
 {
@@ -13,11 +14,13 @@ class MainLoop
 {
 
     SDL_Window* window;
+    SDL_GLContext windowGLCtx;
     bool isRunning;
 
     void init(ref MainLoopConfig config)
     {
         assert(this.window == null);
+        assert(this.windowGLCtx == null);
         assert(this.isRunning == false);
 
         SDLSupport ret = loadSDL();
@@ -26,10 +29,33 @@ class MainLoop
         int err = SDL_Init(SDL_INIT_EVERYTHING);
         assert(err == 0);
 
-        this.window = SDL_CreateWindow(config.windowTitle.ptr ? config.windowTitle.ptr : "dmoge", SDL_WINDOWPOS_UNDEFINED,
-                SDL_WINDOWPOS_UNDEFINED, config.windowWidth,
-                config.windowHeight, SDL_WINDOW_SHOWN);
-        assert(this.window);
+        const char* title = config.windowTitle.ptr ? config.windowTitle.ptr : "dmoge";
+        SDL_WindowFlags flags = SDL_WINDOW_SHOWN;
+        if (gl.getGLBackend() == gl.GLBackend.ogl)
+        {
+            flags |= SDL_WINDOW_OPENGL;
+        }
+
+        this.window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED,
+                SDL_WINDOWPOS_UNDEFINED, config.windowWidth, config.windowHeight, flags);
+        assert(this.window, "SDL_CreateWindow is failed");
+
+        if (gl.getGLBackend() == gl.GLBackend.ogl)
+        {
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+            SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+            SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+            SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+            SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+            SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+            this.windowGLCtx = SDL_GL_CreateContext(this.window);
+            assert(this.windowGLCtx, "SDL_GL_CreateContext is failed");
+
+            err = SDL_GL_MakeCurrent(this.window, this.windowGLCtx);
+            assert(err == 0);
+        }
 
         this.isRunning = true;
 
@@ -42,6 +68,13 @@ class MainLoop
         assert(this.window);
 
         this.onShutdown();
+
+        if (gl.getGLBackend() == gl.GLBackend.ogl)
+        {
+            assert(this.windowGLCtx);
+            SDL_GL_DeleteContext(this.windowGLCtx);
+            this.windowGLCtx = null;
+        }
 
         SDL_DestroyWindow(this.window);
         this.window = null;
